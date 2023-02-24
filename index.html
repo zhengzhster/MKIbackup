@@ -12,8 +12,8 @@
   <img src="https://content.codecademy.com/articles/github-pages-via-web-app/happy-ice-cream.gif" />
 
    <script>
-      $(document).ready(function(){
-    	 var baseurl = "https://jsonplaceholder.typicode.com/todos";
+    <!--  $(document).ready(function(){
+	   var baseurl = "https://jsonplaceholder.typicode.com/todos";
     	 var xmlhttp = new XMLHttpRequest();
     	 xmlhttp.open("GET",baseurl,true);
     	 xmlhttp.onreadystatechange = function(){
@@ -52,7 +52,42 @@
 	      <th>Completed</th>
 	    </tr>
     </tfoot>
-    </table>
+    </table> -->
+	
+    $(document).ready(function() {
+      // Fetch CSV data and parse it using Papa Parse
+      $.get('data.csv', function(data) {
+        const parsedData = Papa.parse(data, { header: true }).data;
+
+        // Create DataTable using parsed data
+        $('#myTable').DataTable({
+          data: parsedData,
+    				"columns":[
+    					{data: "Name"},
+    					{data: "Age"},
+    					{data: "Gender"},
+    				]
+    			 });
+    		 }
+      });
+    </script>  
   
+
+   <table id="example" class="display" style="width:100%">
+    <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Age</th>
+	      <th>Gender</th>
+	    </tr>
+    </thead>
+    <tfoot>
+	    <tr>
+	      <th>Name</th>
+	      <th>Age</th>
+	      <th>Gender</th>
+	    </tr>
+    </tfoot>
+    </table>
   </body>
 </html>
